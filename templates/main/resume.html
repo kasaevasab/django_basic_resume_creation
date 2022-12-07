@@ -1,0 +1,125 @@
+{#resume, skills, education, projects#}
+
+{% extends 'main/base.html' %}
+{% block title %} {{ resume.title }}{% endblock %}
+
+{% block content %}
+{#    <h1> {{ resume.title }}</h1>#}
+    <form method = 'POST' action="#">
+        {% csrf_token %}
+        <div>
+            <p>Имя</p>
+            <input type="text" name="name" value="{{ resume.name }}">
+        </div>
+        <div>
+            <p>Фамилия</p>
+            <input type="text" name="surname" value="{{ resume.surname }}">
+        </div>
+        <div>
+            <p>Телефон</p>
+            <input type="text" name="phone_number" value="{{ resume.phone_number }}">
+        </div>
+        <div>
+            <p>Telegram</p>
+            <input type="text" name="name" value="{{ resume.telegram }}">
+        </div>
+        <div>
+            <p>Образование</p>
+            <textarea name="education">{{ resume.education }}"</textarea>
+        </div>
+        <div>
+            <p>Навыки</p>
+            <textarea name="skills">{{ resume.skills }}"</textarea>
+        </div>
+        <div>
+            <p>Опыт работы</p>
+            <textarea name="experience">{{ resume.experience }}"</textarea>
+        </div>
+        <div>
+            <p>Проекты</p>
+            <textarea name="projects">{{ resume.projects }}"</textarea>
+        </div>
+        <div>
+            <button name="save_resume" type="submit" class="btn btn-success">Сохранить</button>
+            <button name="export_pdf" type="submit" class="btn btn-success">Экспортировать в PDF</button>
+        </div>
+    </form>
+    {% comment %}<form method = 'POST' action="#">
+        {% csrf_token %}
+        <div>
+            <p>Имя</p>
+            <input type="text" name="name" value="{{ resume.name }}">
+        </div>
+        <div>
+            <p>Фамилия</p>
+            <input type="text" name="surname" value="{{ resume.surname }}">
+        </div>
+        <div>
+            <p>Телефон</p>
+            <input type="text" name="phone_number" value="{{ resume.phone_number }}">
+        </div>
+        <div>
+            <p>Telegram</p>
+            <input type="text" name="name" value="{{ resume.telegram }}">
+        </div>
+
+        <div>
+            <h2>Образование</h2>
+            {% for ed in educations %}
+			<div class="input-group mb-3">
+                <div class="input-group-text">
+	      				<input type="text" name="ed_{{ ed.name}}" value="{{ ed.name }}">
+                </div>
+			</div>
+		    {% endfor %}
+            <div>
+                <input type="text" name="new_ed" value="">
+                <button name="add_new_ed" type="submit" class="btn btn-success">Добавить</button>
+            </div>
+        </div>
+        <div>
+            <h2>Навыки</h2>
+            {% for skill in skills %}
+			<div class="input-group mb-3">
+                <div class="input-group-text">
+	      				<input type="text" name="new_skill" value="{{ skill.name }}">
+                </div>
+			</div>
+		    {% endfor %}
+            <div>
+                <input type="text" name="new_skill" value="">
+                <button name="add_new_skill" type="submit" class="btn btn-success">Добавить</button>
+            </div>
+        </div>
+        <div>
+            <h2>Опыт работы</h2>
+            {% for exp in experience %}
+			<div class="input-group mb-3">
+                <div class="input-group-text">
+	      				<input type="textarea" name="new_exp" value="{{ exp.name }}">
+                </div>
+			</div>
+		    {% endfor %}
+            <div>
+                <input type="textarea" name="new_exp" value="">
+                <button name="add_new_exp" type="submit" class="btn btn-success">Добавить</button>
+            </div>
+        </div>
+        <div>
+            <h2>Проекты</h2>
+            {% for project in projects %}
+			<div class="input-group mb-3">
+                <div class="input-group-text">
+	      				<input type="text" name="new_project" value="{{ project.name }}">
+                </div>
+			</div>
+		    {% endfor %}
+            <button name="add_new_project" type="submit" class="btn btn-success">Добавить</button>
+        </div>
+		<br>
+        <div>
+            <button name="save_resume" type="submit" class="btn btn-success">Сохранить</button>
+            <button name="export_pdf" type="submit" class="btn btn-success">Экспортировать в PDF</button>
+        </div>
+        </form>{% endcomment %}
+{% endblock %}
