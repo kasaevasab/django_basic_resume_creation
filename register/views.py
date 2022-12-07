@@ -9,7 +9,7 @@ def login_view(request):
         if form.is_valid():
             user = form.get_user()
             login(request, user)
-            return redirect('home')
+            return redirect('resume')
         else:
             return render(request, 'register/login.html', {'form': form})
     else:
@@ -29,7 +29,7 @@ def signup_view(request):
             password = form.cleaned_data.get('password1')
             login(request, authenticate(username=username, password=password))
 
-            return redirect('home')
+            return redirect('resume')
         else:
             return render(request, 'register/signup.html', {'form': form})
     else:
@@ -40,4 +40,4 @@ def signup_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('login')

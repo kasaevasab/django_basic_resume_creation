@@ -1,125 +1,125 @@
 {#resume, skills, education, projects#}
 
 {% extends 'main/base.html' %}
+{% load crispy_forms_tags %}
 {% block title %} {{ resume.title }}{% endblock %}
 
 {% block content %}
-{#    <h1> {{ resume.title }}</h1>#}
-    <form method = 'POST' action="#">
+    {#    <h1> {{ resume.title }}</h1>#}
+    {% comment %}    <form method="POST">
         {% csrf_token %}
-        <div>
-            <p>Имя</p>
-            <input type="text" name="name" value="{{ resume.name }}">
-        </div>
-        <div>
-            <p>Фамилия</p>
-            <input type="text" name="surname" value="{{ resume.surname }}">
-        </div>
-        <div>
-            <p>Телефон</p>
-            <input type="text" name="phone_number" value="{{ resume.phone_number }}">
-        </div>
-        <div>
-            <p>Telegram</p>
-            <input type="text" name="name" value="{{ resume.telegram }}">
-        </div>
-        <div>
-            <p>Образование</p>
-            <textarea name="education">{{ resume.education }}"</textarea>
-        </div>
-        <div>
-            <p>Навыки</p>
-            <textarea name="skills">{{ resume.skills }}"</textarea>
-        </div>
-        <div>
-            <p>Опыт работы</p>
-            <textarea name="experience">{{ resume.experience }}"</textarea>
-        </div>
-        <div>
-            <p>Проекты</p>
-            <textarea name="projects">{{ resume.projects }}"</textarea>
-        </div>
+        {{ form.as_p }}
         <div>
             <button name="save_resume" type="submit" class="btn btn-success">Сохранить</button>
             <button name="export_pdf" type="submit" class="btn btn-success">Экспортировать в PDF</button>
+        </div>
+    </form>{% endcomment %}
+    <form method='POST' action="#">
+        {% csrf_token %}
+        {% comment %}<div class="row">
+            <div class="col">
+                <img src="{{ resume.avatar.path }}" class="img-thumbnail">
+            </div>
+            <div class="col">
+                <div class="row">
+                    <label for="avatar">Выберите другое фото</label>
+                </div>
+                <div class="row">
+                    <input type="file" id="img" name="avatar" accept="image/*">
+                </div>
+            </div>
+        </div>{% endcomment %}
+        <div>
+            <p>Имя</p>
+            <input type="text" class='container-fluid' name="name" value="{{ resume.name }}">
+        </div>
+        <br>
+        <div>
+            <p>Фамилия</p>
+            <input type="text" class='container-fluid' name="surname" value="{{ resume.surname }}">
+        </div>
+        <br>
+        <div>
+            <p>Email</p>
+            <input type="text" class='container-fluid' name="email" value="{{ resume.email }}">
+        </div>
+        <br>
+        <div>
+            <p>Телефон</p>
+            <input type="text" class='container-fluid' name="phone_number" value="{{ resume.phone_number }}">
+        </div>
+        <br>
+        <div>
+            <p>Telegram</p>
+            <input type="text" class='container-fluid' name="telegram" value="{{ resume.telegram }}">
+        </div>
+        <br>
+        <div class="accordion accordion-flush" id="accordionFlushExample">
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingEd">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseEd" aria-expanded="false" aria-controls="flush-collapseEd">
+                        Образование
+                    </button>
+                </h2>
+                <div id="flush-collapseEd" class="accordion-collapse collapse" aria-labelledby="flush-headingEd"
+                     data-bs-parent="#accordionFlushExample">
+                    <textarea class="accordion-body container-fluid" name="education">{{ resume.education }}
+                    </textarea>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingSkills">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseSkills" aria-expanded="false"
+                            aria-controls="flush-collapseSkills">
+                        Навыки
+                    </button>
+                </h2>
+                <div id="flush-collapseSkills" class="accordion-collapse collapse" aria-labelledby="flush-headingSkills"
+                     data-bs-parent="#accordionFlushExample">
+                    <textarea class="accordion-body container-fluid" name="skills">{{ resume.skills }}
+                    </textarea>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingExp">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseExp" aria-expanded="false" aria-controls="flush-collapseExp">
+                        Опыт работы
+                    </button>
+                </h2>
+                <div id="flush-collapseExp" class="accordion-collapse collapse" aria-labelledby="flush-headingExp"
+                     data-bs-parent="#accordionFlushExample">
+                    <textarea class="accordion-body container-fluid" name="experience">{{ resume.experience }}
+                    </textarea>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="flush-headingProjects">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapseProjects" aria-expanded="false"
+                            aria-controls="flush-collapseProjects">
+                        Проекты
+                    </button>
+                </h2>
+                <div id="flush-collapseProjects" class="accordion-collapse collapse"
+                     aria-labelledby="flush-headingProjects"
+                     data-bs-parent="#accordionFlushExample">
+                    <textarea class="accordion-body container-fluid" name="projects">{{ resume.projects }}
+                    </textarea>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">
+                <button name="save_resume" type="submit" class="btn btn-success container-fluid">Сохранить</button>
+            </div>
+            <div class="col">
+                <button name="export_pdf" type="submit" class="btn btn-success container-fluid">Экспортировать в PDF
+                </button>
+            </div>
         </div>
     </form>
-    {% comment %}<form method = 'POST' action="#">
-        {% csrf_token %}
-        <div>
-            <p>Имя</p>
-            <input type="text" name="name" value="{{ resume.name }}">
-        </div>
-        <div>
-            <p>Фамилия</p>
-            <input type="text" name="surname" value="{{ resume.surname }}">
-        </div>
-        <div>
-            <p>Телефон</p>
-            <input type="text" name="phone_number" value="{{ resume.phone_number }}">
-        </div>
-        <div>
-            <p>Telegram</p>
-            <input type="text" name="name" value="{{ resume.telegram }}">
-        </div>
-
-        <div>
-            <h2>Образование</h2>
-            {% for ed in educations %}
-			<div class="input-group mb-3">
-                <div class="input-group-text">
-	      				<input type="text" name="ed_{{ ed.name}}" value="{{ ed.name }}">
-                </div>
-			</div>
-		    {% endfor %}
-            <div>
-                <input type="text" name="new_ed" value="">
-                <button name="add_new_ed" type="submit" class="btn btn-success">Добавить</button>
-            </div>
-        </div>
-        <div>
-            <h2>Навыки</h2>
-            {% for skill in skills %}
-			<div class="input-group mb-3">
-                <div class="input-group-text">
-	      				<input type="text" name="new_skill" value="{{ skill.name }}">
-                </div>
-			</div>
-		    {% endfor %}
-            <div>
-                <input type="text" name="new_skill" value="">
-                <button name="add_new_skill" type="submit" class="btn btn-success">Добавить</button>
-            </div>
-        </div>
-        <div>
-            <h2>Опыт работы</h2>
-            {% for exp in experience %}
-			<div class="input-group mb-3">
-                <div class="input-group-text">
-	      				<input type="textarea" name="new_exp" value="{{ exp.name }}">
-                </div>
-			</div>
-		    {% endfor %}
-            <div>
-                <input type="textarea" name="new_exp" value="">
-                <button name="add_new_exp" type="submit" class="btn btn-success">Добавить</button>
-            </div>
-        </div>
-        <div>
-            <h2>Проекты</h2>
-            {% for project in projects %}
-			<div class="input-group mb-3">
-                <div class="input-group-text">
-	      				<input type="text" name="new_project" value="{{ project.name }}">
-                </div>
-			</div>
-		    {% endfor %}
-            <button name="add_new_project" type="submit" class="btn btn-success">Добавить</button>
-        </div>
-		<br>
-        <div>
-            <button name="save_resume" type="submit" class="btn btn-success">Сохранить</button>
-            <button name="export_pdf" type="submit" class="btn btn-success">Экспортировать в PDF</button>
-        </div>
-        </form>{% endcomment %}
 {% endblock %}
